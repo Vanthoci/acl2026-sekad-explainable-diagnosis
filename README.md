@@ -4,7 +4,7 @@
 
 > This repository contains experimental software and is published for the sole purpose of giving additional background details on the respective publication.
 
-Abstract:
+## Abstract
 
 Explainable diagnosis requires that authoritative medical knowledge provide the rationales linking a patient’s clinical manifestations to the diagnostic conclusion. Although large language models (LLMs) hold great potential to facilitate explainable diagnosis, their effectiveness is often constrained by insufficient diagnostic expertise. To address this limitation, we propose Self-learned Explainable Knowledge Augmented Diagnosis (SEKAD), a unified LLM-based framework for faithful and explainable diagnosis. Our approach builds a high-quality diagnostic knowledge base through a record-driven explanation learning paradigm, as well as applies this knowledge via an explanation-based diagnostic process that ensures faithful inference. Experiments on the DiReCT and JAMA benchmarks show that SEKAD consistently outperforms strong baselines across the metrics. In particular, on the DiReCT benchmark, SEKAD improves the explanation completeness metric from 64.5% to 76.9% over the best existing methods, highlighting its effectiveness in enhancing diagnostic explainability and showing that our text mining approach produces knowledge that is both reliable in quality and large in quantity
 
@@ -68,21 +68,4 @@ If you have already generated predictions and wish to re-run the evaluation:
 
 ```bash
 python run_evaluation.py predicts/your_prediction_folder
-```
-
----
-
-## Citation
-
-If you use this work, please cite the following paper from the [DiReCT](https://github.com/wbw520/DiReCT) project:
-
-```bibtex
-@inproceedings{wangdirect,
- author = {Wang, Bowen and Chang, Jiuyang and Qian, Yiming and Chen, Guoxin and Chen, Junhao and Jiang, Zhouqiang and Zhang, Jiahao and Nakashima, Yuta and Nagahara, Hajime},
- booktitle = {Advances in Neural Information Processing Systems},
- pages = {74999--75011},
- title = {DiReCT: Diagnostic Reasoning for Clinical Notes via Large Language Models},
- volume = {38},
- year = {2024}
-}
 ```
