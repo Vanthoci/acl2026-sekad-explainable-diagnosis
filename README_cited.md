@@ -1,0 +1,54 @@
+# DiReCT: Diagnostic Reasoning for Clinical Notes via Large Language Models 
+This repository is the official implementation of [DiReCT](https://arxiv.org/abs/2408.01933). It contains the codes for running the baseline method as well as automatic evaluation. 
+Our dataset aims to assess the ability of large language model in aligning with human doctor in diagnostic reasoning for clinical notes.
+![Diagnostic Procedure](imgs/imgs.png)
+
+## Data Set
+Our dataset is now available at [PhysioNet](https://doi.org/10.13026/yf96-kc87) . Several samples of annotated data 
+(they are synthesis data not from MIMIC) are available in the "samples" folder.
+
+Data annotation and structure refer to [Annotation and Tools](https://github.com/wbw520/DiReCT/tree/master/utils/data_annotation) <br>
+Data list and loading refer to [Data Loading and Analysis](https://github.com/wbw520/DiReCT/tree/master/utils/data_loading_analysisi)
+
+## Implementation of Baseline Experiment
+We show the implementation for LLama3-8B and GPT Azure.
+For [LLama3](https://github.com/meta-llama/llama3), we use the official code on GitHub. Refer to their settings to prepare the environments and download the pre-trained models. 
+The final output is save in a JSON file in a dictionary structure as: {o: [z, r, d] ...}. r means the part of the clinical note where o is extracted. 
+An prediction folder "predict_" will be generated.
+#### Experiment with OpenAI-Compatible API
+Put your API settings in `.env`. A folder of `predict_Your Model` will be generated.
+```
+from mix_diagnosis import USE_GPT_API
+
+USE_GPT_API(root="samples", use_p=False, model="Your Model")
+```
+
+## Automatic Evaluation
+We use the LLama3-8B for this evaluation. Our prompts refer to utils/data_extraction.py <br>
+With functions: discriminate_similarity_observation() and  discriminate_similarity_reason()
+#### Evaluation for Completeness and Faithfulness
+An evaluation folder "_eval" will be generated for all prediction. Each prediction has a evaluation results, show the matched observations and rationales.
+Run the following command for evaluation.
+```
+python run_evaluation.py predicts/predict_Your_Model_premise
+```
+#### Results Statistics
+Run the following code to show the statistics of metrics for each sample.
+```
+from evaluation_stats import process
+
+process(root="samples", pred_name="predict_Your_Model_premise_eval")
+```
+## Publication
+
+If you want to use this work, please consider citing the following paper.
+```
+@inproceedings{wangdirect,
+ author = {Wang, Bowen and Chang, Jiuyang and Qian, Yiming and Chen, Guoxin and Chen, Junhao and Jiang, Zhouqiang and Zhang, Jiahao and Nakashima, Yuta and Nagahara, Hajime},
+ booktitle = {Advances in Neural Information Processing Systems},
+ pages = {74999--75011},
+ title = {DiReCT: Diagnostic Reasoning for Clinical Notes via Large Language Models},
+ volume = {38},
+ year = {2024}
+}
+```

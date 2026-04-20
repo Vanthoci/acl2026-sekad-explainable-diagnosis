@@ -1,0 +1,9 @@
+openai
+tqdm
+scipy
+numpy
+transformers
+torch
+fire
+pytz
+python-dotenv
